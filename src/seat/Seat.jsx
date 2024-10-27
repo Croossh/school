@@ -47,8 +47,26 @@ const SeatHome = () => {
       <SelectHeader>
         <SelectContainer>
           {store.selectSeatArray.map((item) => {
-            if (item.includes("명") || item.includes("쪽")) {
+            if (item.includes("쪽")) {
               return <div key={v4()}>{item}</div>;
+            } else if (item.includes("명")) {
+              return (
+                <div key={v4()}>
+                  <div>{item}</div>
+                  <div>
+                    {Array.from({ length: Number(item.slice(0, 1)) }, (va, id) => id).map(() => {
+                      return (
+                        <img
+                          key={v4()}
+                          src={`${process.env.PUBLIC_URL}/images/person.png`}
+                          name={"person"}
+                          alt={""}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              );
             } else {
               return (
                 <img key={v4()} src={`${process.env.PUBLIC_URL}/images/${item}.jpg`} alt={""} />
@@ -93,6 +111,7 @@ const SeatHome = () => {
 
       {store.selectSeatArray.length === 2 && (
         <SelectBody>
+          <h1>좌석을 선택해주세요.</h1>
           <BodyItems2>
             <div
               onClick={() => {
@@ -206,7 +225,8 @@ const BodyItems = styled.div`
 
   > div {
     width: 40%;
-    height: 200px;
+    height: 230px;
+    padding: 10px;
 
     border: 4px solid black;
     border-radius: 10px;
@@ -215,10 +235,12 @@ const BodyItems = styled.div`
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
+    gap: 20px;
 
     cursor: pointer;
 
     > div:first-child {
+      width: 28%;
       font-size: 50px;
       font-weight: bold;
 
@@ -228,11 +250,12 @@ const BodyItems = styled.div`
       border-radius: 10px;
     }
 
-    > div {
+    > div:last-child {
+      width: 60%;
       > img {
         width: 50px;
         margin-top: 10px;
-        margin-right: 15px;
+        margin-right: 30px;
         cursor: pointer;
       }
     }

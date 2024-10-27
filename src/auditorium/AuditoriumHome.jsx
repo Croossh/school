@@ -221,6 +221,10 @@ export const SelectContainer = styled.div`
       font-size: 40px;
       font-weight: bold;
       gap: 10px;
+
+      > img {
+        width: 30px;
+      }
     }
   }
 `;

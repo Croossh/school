@@ -79,6 +79,13 @@ const ScheduleHome = () => {
   };
 
   useEffect(() => {
+    return () => {
+      store.initState();
+      setConfirm(false);
+    };
+  }, []);
+
+  useEffect(() => {
     if (location.pathname === "/schedule/home") {
       store.initState();
       setConfirm(false);
@@ -127,7 +134,7 @@ const ScheduleHome = () => {
         </SelectContainer>
       </SelectHeader>
 
-      {store.selectScheduleArray.length === 1 && (
+      {store.selectScheduleArray.length === 1 && store.selectTime.length !== 3 && (
         <SelectBody>
           <h1>
             날짜는 언제인가요?
@@ -283,7 +290,7 @@ const ScheduleHome = () => {
             src={`${process.env.PUBLIC_URL}/images/back.png`}
             alt={""}
             onClick={() => {
-              if (location.pathname === "/schedule/home" && store.selectTime.length === 2) {
+              if (location.pathname === "/schedule/home" && store.selectTime.length === 3) {
                 store.initState();
                 setConfirm(false);
                 store.deleteLastMenu("selectScheduleArray");

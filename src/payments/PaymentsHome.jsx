@@ -120,7 +120,7 @@ const PaymentsHome = () => {
             />
             <img
               src={`${process.env.PUBLIC_URL}/images/discount2.jpg`}
-              name={"discount1"}
+              name={"discount2"}
               alt={""}
               onClick={(e) => {
                 store.selectThirdMenu(e, "selectPaymentsArray");

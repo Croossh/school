@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <Container>
-      <h1>목차를 선택해주세요.</h1>
+      <Header>목차를 선택해주세요.</Header>
       {/* 상단 아이템 */}
       <ItemContainer>
         <LinkContainer>
@@ -114,6 +114,12 @@ const Home = () => {
 
 export default Home;
 
+const Header = styled.h1`
+  font-size: 50px;
+  font-weight: bold;
+  margin-top: 30px;
+`;
+
 export const Container = styled.div`
   display: flex;
   /* justify-content: center; */
@@ -122,11 +128,6 @@ export const Container = styled.div`
   gap: 20px;
 
   width: 100%;
-
-  > h1 {
-    font-size: 50px;
-    font-weight: bold;
-  }
 `;
 
 const ItemContainer = styled.div`
