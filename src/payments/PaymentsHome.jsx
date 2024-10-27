@@ -67,7 +67,6 @@ const PaymentsHome = () => {
   // console.log("selectSeatArray", store.selectSeatArray);
   // console.log("selectPaymentsArray", store.selectPaymentsArray);
 
-  console.log(store.papago);
   return (
     <Container>
       <SelectHeader>
@@ -128,6 +127,16 @@ const PaymentsHome = () => {
                 navigate(`${store.selectPaymentsArray[1]}/2`);
               }}
             />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/fourth_1.jpg`}
+              name={"fourth_1"}
+              alt={""}
+              onClick={(e) => {
+                store.selectSecondMenu(e, "selectPaymentsArray");
+                store.selectThirdMenu({ target: { name: "no" } }, "selectPaymentsArray");
+                navigate(e.target.name);
+              }}
+            />
           </BodyItems>
         </SelectBody>
       )}
@@ -175,7 +184,8 @@ const PaymentsHome = () => {
               <div>예약 시간:</div>
               {store.selectScheduleArray.map((item, idx) => {
                 if (idx === 0) return "";
-                if (idx === 1) return <div>{`${item[0]}월 ${item[1]}일(${item[2]})`}</div>;
+                if (idx === 1)
+                  return <div key={v4()}>{`${item[0]}월 ${item[1]}일(${item[2]})`}</div>;
                 return <div key={v4()}>{store.papago.schedule[item]}</div>;
               })}
             </div>

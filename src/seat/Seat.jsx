@@ -135,7 +135,7 @@ const SeatHome = () => {
 
       {store.selectSeatArray.length === 3 && (
         <SelectBody>
-          <h1>좌석 정보를 확인해 주세요.</h1>
+          <h1>좌석 정보를 확인해주세요.</h1>
           <BodyItems3>
             <ConfrimItem
               name={"confirm"}

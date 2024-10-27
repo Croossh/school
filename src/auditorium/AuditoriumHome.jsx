@@ -123,7 +123,7 @@ const AuditoriumHome = () => {
 
       {store.selectShowArray.length === 3 && (
         <SelectBody>
-          <h1>관람정보를 확인해 주세요.</h1>
+          <h1>관람정보를 확인해주세요.</h1>
           <BodyItems>
             <ConfrimItem
               name={"confirm"}

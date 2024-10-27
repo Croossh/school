@@ -85,8 +85,6 @@ const ScheduleHome = () => {
     }
   }, [location.pathname]);
 
-  console.log(store.selectTime);
-
   useEffect(() => {
     // 1, 3, 5, 7, 8, 10 ,12
     // (2) 4, 6, 9, 11
@@ -214,7 +212,7 @@ const ScheduleHome = () => {
 
       {store.selectScheduleArray.length === 2 && confirm && (
         <SelectBody>
-          <h1>시간을 선택해주세요.</h1>
+          <h1>공연시간을 말해주세요.</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/one.jpg`}
@@ -249,7 +247,7 @@ const ScheduleHome = () => {
 
       {store.selectScheduleArray.length === 3 && (
         <SelectBody>
-          <h1>예약한 시간을 확인해 주세요.</h1>
+          <h1>예약한 내용을 확인해주세요.</h1>
           <BodyItems>
             <ConfrimItem
               name={"confirm"}
@@ -285,12 +283,14 @@ const ScheduleHome = () => {
             src={`${process.env.PUBLIC_URL}/images/back.png`}
             alt={""}
             onClick={() => {
-              if (location.pathname === "/schedule/home") {
+              if (location.pathname === "/schedule/home" && store.selectTime.length === 2) {
                 store.initState();
                 setConfirm(false);
+                store.deleteLastMenu("selectScheduleArray");
+              } else {
+                store.deleteLastMenu("selectScheduleArray");
+                navigate(-1);
               }
-              store.deleteLastMenu("selectScheduleArray");
-              navigate(-1);
             }}
           />
           <img

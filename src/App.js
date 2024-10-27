@@ -29,7 +29,7 @@ function App() {
 export default App;
 
 const Contanier = styled.div`
-  width: 1200px;
+  width: 1000px;
   height: 95vh;
   margin: auto;
   margin-top: 30px;
