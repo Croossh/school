@@ -341,9 +341,10 @@ const ConfrimItem = styled.div`
 
 const SelectBody2 = styled.div`
   width: 90%;
+  min-height: 700px;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 

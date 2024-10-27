@@ -230,9 +230,10 @@ export const SelectContainer = styled.div`
 `;
 export const SelectBody = styled.div`
   width: 90%;
+  min-height: 700px;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 
