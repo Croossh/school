@@ -311,7 +311,11 @@ const ScheduleHome = () => {
             }}
           />
         </div>
-        <div></div>
+        <div>
+          <img src={`${process.env.PUBLIC_URL}/images/sayAgain.png`} alt={""} onClick={() => {}} />
+          <img src={`${process.env.PUBLIC_URL}/images/dontKnow.png`} alt={""} onClick={() => {}} />
+          <img src={`${process.env.PUBLIC_URL}/images/pancel.png`} alt={""} onClick={() => {}} />
+        </div>
       </Bottom>
     </Container>
   );

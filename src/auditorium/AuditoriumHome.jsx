@@ -171,7 +171,11 @@ const AuditoriumHome = () => {
             }}
           />
         </div>
-        <div></div>
+        <div>
+          <img src={`${process.env.PUBLIC_URL}/images/sayAgain.png`} alt={""} onClick={() => {}} />
+          <img src={`${process.env.PUBLIC_URL}/images/dontKnow.png`} alt={""} onClick={() => {}} />
+          <img src={`${process.env.PUBLIC_URL}/images/pancel.png`} alt={""} onClick={() => {}} />
+        </div>
       </Bottom>
     </Container>
   );
@@ -277,6 +281,18 @@ export const Bottom = styled.div`
 
   > div:last-child {
     width: 60%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+
+    > img {
+      cursor: pointer;
+
+      width: 150px;
+      border: 3px solid black;
+    }
   }
 `;
 
