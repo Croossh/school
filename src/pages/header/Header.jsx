@@ -31,7 +31,7 @@ export default Header;
 
 const ProgressCont = styled.div`
   width: 95%;
-  margin: 0 auto;
+  margin: 60px auto 80px auto;
 
   display: flex;
   justify-content: space-between;
@@ -45,7 +45,6 @@ const ProgressBar = styled.div`
   width: 100%;
   height: 40px;
 
-  margin-bottom: 40px;
   border-radius: 15px;
 
   display: flex;
@@ -72,7 +71,6 @@ const ProgCurrent = styled.div`
 
 const Progress = styled.div`
   width: 40%;
-  margin-bottom: 40px;
 
   display: flex;
   justify-content: flex-end;

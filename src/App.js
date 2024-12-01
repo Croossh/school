@@ -32,9 +32,8 @@ export default App;
 
 const Contanier = styled.div`
   width: 1000px;
-  height: 95vh;
-  margin: auto;
-  margin-top: 30px;
+  height: 100%;
+  margin: 20px auto;
 
   display: flex;
   justify-content: center;
