@@ -46,13 +46,13 @@ const ProgressBar = styled.div`
   height: 40px;
 
   margin-bottom: 40px;
-  border-radius: 10px;
+  border-radius: 15px;
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
 
-  border: 1px solid #5ac3db;
+  border: 5px solid #5a72db;
 `;
 
 const ProgCurrent = styled.div`
@@ -66,7 +66,7 @@ const ProgCurrent = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  border: 1px solid #5a72db;
+  border: px solid #5a72db;
   background-color: #5ac3db;
 `;
 

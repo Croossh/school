@@ -135,7 +135,7 @@ const ItemContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 50px;
+  gap: 40px;
 
   width: 100%;
   margin-top: 50px;
@@ -145,8 +145,9 @@ const LinkContainer = styled.div`
   width: 80%;
   height: 210px;
 
-  border: 3px solid black;
+  border: 5px solid black;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px gray;
 
   display: flex;
   justify-content: center;
@@ -157,7 +158,7 @@ const LinkContainer = styled.div`
     align-items: center;
     flex-direction: row;
 
-    gap: 100px;
+    gap: 90px;
   }
 
   > div > a {

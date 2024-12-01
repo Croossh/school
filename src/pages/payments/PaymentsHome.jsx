@@ -99,7 +99,7 @@ const PaymentsHome = () => {
 
       {store.selectPaymentsArray.length === 1 && (
         <SelectBody>
-          <h1>계산해주세요.</h1>
+          <h1>계산해 주세요.</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/fourth_1.jpg`}
@@ -126,7 +126,7 @@ const PaymentsHome = () => {
 
       {store.selectPaymentsArray.length === 2 && store.selectPaymentsArray[1] === "discount" && (
         <SelectBody>
-          <h1>할인정보를 선택해주세요.</h1>
+          <h1>할인정보를 선택해 주세요.</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/discount1.jpg`}
@@ -162,7 +162,7 @@ const PaymentsHome = () => {
 
       {store.selectPaymentsArray.length === 3 && (
         <SelectBody>
-          <h1>결제 방법을 선택해주세요.</h1>
+          <h1>결제 방법을 선택해 주세요.</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/credit.jpg`}
@@ -190,7 +190,7 @@ const PaymentsHome = () => {
 
       {store.selectPaymentsArray.length === 4 && (
         <SelectBody2>
-          <h1>결제정보를 확인해주세요.</h1>
+          <h1>결제정보를 확인해 주세요.</h1>
           <DetailContainer>
             <div>
               <div>관람 정보:</div>
@@ -253,7 +253,7 @@ const PaymentsHome = () => {
 
       {store.selectPaymentsArray.length === 5 && (
         <SelectBody>
-          <h1>결제가 완료 되었습니다.</h1>
+          <h1>결제가 성공적으로 완료되었습니다.</h1>
           <BodyItems>
             <img src={`${process.env.PUBLIC_URL}/images/fourth_2.jpg`} name={"fourth_2"} alt={""} />
           </BodyItems>

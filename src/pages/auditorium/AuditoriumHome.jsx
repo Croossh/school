@@ -68,7 +68,7 @@ const AuditoriumHome = () => {
 
       {store.selectShowArray.length === 1 && (
         <SelectBody>
-          <h1>관람유형을 선택해주세요.</h1>
+          <h1>보고자 하는 상영물은 무엇인가요?</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/auditorium_1.jpg`}
@@ -103,7 +103,7 @@ const AuditoriumHome = () => {
 
       {store.selectShowArray.length === 2 && (
         <SelectBody>
-          <h1>무엇이 있나요?</h1>
+          <h1>어떤 상영물이 있는지 알려주세요.</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/one.jpg`}
@@ -138,7 +138,7 @@ const AuditoriumHome = () => {
 
       {store.selectShowArray.length === 3 && (
         <SelectBody>
-          <h1>관람정보를 확인해주세요.</h1>
+          <h1>선택한 내용이 맞는지 확인해 주세요.</h1>
           <BodyItems>
             <ConfrimItem
               name={"confirm"}

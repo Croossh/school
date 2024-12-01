@@ -234,7 +234,7 @@ const ScheduleHome = () => {
 
       {store.selectScheduleArray.length === 2 && confirm && (
         <SelectBody>
-          <h1>공연시간을 말해주세요.</h1>
+          <h1>공연시간 알려줄 수 있나요?</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/one.jpg`}
@@ -269,7 +269,7 @@ const ScheduleHome = () => {
 
       {store.selectScheduleArray.length === 3 && (
         <SelectBody>
-          <h1>예약한 내용을 확인해주세요.</h1>
+          <h1>선택한 날짜와 시간이 맞나요?</h1>
           <BodyItems>
             <ConfrimItem
               name={"confirm"}

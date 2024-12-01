@@ -93,7 +93,7 @@ const SeatHome = () => {
 
       {store.selectSeatArray.length === 1 && (
         <SelectBody>
-          <h1>인원 수를 선택해주세요.</h1>
+          <h1>인원 수를 선택해 주세요.</h1>
           <BodyItems>
             {Array.from({ length: 4 }, (v, i) => i).map((item, idx) => {
               return (
@@ -126,7 +126,7 @@ const SeatHome = () => {
 
       {store.selectSeatArray.length === 2 && (
         <SelectBody>
-          <h1>좌석을 선택해주세요.</h1>
+          <h1>좌석 위치를 선택해 주세요.</h1>
           <BodyItems2>
             <div
               onClick={() => {
@@ -169,7 +169,7 @@ const SeatHome = () => {
 
       {store.selectSeatArray.length === 3 && (
         <SelectBody>
-          <h1>좌석 정보를 확인해주세요.</h1>
+          <h1>선택한 인원과 좌석이 맞나요?</h1>
           <BodyItems3>
             <ConfrimItem
               name={"confirm"}
