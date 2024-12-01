@@ -4,6 +4,7 @@ import Router from "./router";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Header from "./pages/header/Header";
 
 function App() {
   const navigate = useNavigate();
@@ -13,14 +14,15 @@ function App() {
     selectShowArray: useSelector((state) => state["homeReducer"].selectShowArray),
   };
 
-  // useEffect(() => {
-  //   if (!store.selectShowArray.length > 0) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!store.selectShowArray.length > 0) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <Contanier className="App">
+      <Header />
       <Router />
     </Contanier>
   );
@@ -36,4 +38,5 @@ const Contanier = styled.div`
 
   display: flex;
   justify-content: center;
+  flex-direction: column;
 `;

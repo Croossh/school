@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
-import { Container } from "../home/Home";
-import { Bottom, SelectBody, SelectContainer, SelectHeader } from "../auditorium/AuditoriumHome";
+import { Container } from "pages/home/Home";
+import { Bottom, SelectBody, SelectContainer, SelectHeader } from "pages/auditorium/AuditoriumHome";
 
 import {
   selectSecondMenu,
@@ -12,7 +12,8 @@ import {
   deleteLastMenu,
   deleteAllMenu,
   goToSeat,
-} from "../home/homeSilce";
+  setProgress,
+} from "pages/home/homeSilce";
 
 import {
   initState,
@@ -24,6 +25,7 @@ import {
 } from "./scheduleHomeSlice";
 
 import { v4 } from "uuid";
+import Footer from "pages/footer/Footer";
 
 const ScheduleHome = () => {
   const dispatch = useDispatch();
@@ -76,6 +78,9 @@ const ScheduleHome = () => {
     deleteAllMenu: () => {
       dispatch(deleteAllMenu());
     },
+    setProgress: (value) => {
+      dispatch(setProgress({ value }));
+    },
   };
 
   useEffect(() => {
@@ -109,6 +114,16 @@ const ScheduleHome = () => {
       }, 100);
     }
   }, [store.selectTime.length]);
+
+  useEffect(() => {
+    if (store.selectScheduleArray.length === 1) {
+      store.setProgress(4);
+    } else if (store.selectScheduleArray.length === 2) {
+      store.setProgress(5);
+    } else if (store.selectScheduleArray.length === 3) {
+      store.setProgress(6);
+    }
+  }, [store.selectScheduleArray.length]);
 
   return (
     <Container>
@@ -284,39 +299,20 @@ const ScheduleHome = () => {
         </SelectBody>
       )}
 
-      <Bottom>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/back.png`}
-            alt={""}
-            onClick={() => {
-              if (location.pathname === "/schedule/home" && store.selectTime.length === 3) {
-                store.initState();
-                setConfirm(false);
-                store.deleteLastMenu("selectScheduleArray");
-              } else {
-                store.deleteLastMenu("selectScheduleArray");
-                navigate(-1);
-              }
-            }}
-          />
-          <img
-            src={`${process.env.PUBLIC_URL}/images/home.png`}
-            alt={""}
-            onClick={() => {
-              store.initState();
-              setConfirm(false);
-              store.deleteAllMenu();
-              navigate("/");
-            }}
-          />
-        </div>
-        <div>
-          <img src={`${process.env.PUBLIC_URL}/images/sayAgain.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/dontKnow.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/pancel.png`} alt={""} onClick={() => {}} />
-        </div>
-      </Bottom>
+      <Footer
+        pageNM={"selectScheduleArray"}
+        backFunc={() => {
+          if (location.pathname === "/schedule/home" && store.selectTime.length === 3) {
+            store.initState();
+            setConfirm(false);
+            store.deleteLastMenu("selectScheduleArray");
+          }
+        }}
+        homeFunc={() => {
+          store.initState();
+          setConfirm(false);
+        }}
+      />
     </Container>
   );
 };

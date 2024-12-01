@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "KoddiUDOnGothic";
+  src: url("./assest/fonts/KoddiUDOnGothic-Regular.eot");
+  src: url("./assest/fonts/KoddiUDOnGothic-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./assest/fonts/KoddiUDOnGothic-Regular.woff") format("woff"),
+    url("./assest/fonts/KoddiUDOnGothic-Regular.woff2") format("woff2");
+}
+
 .App {
   background-color: white;
+  font-family: "KoddiUDOnGothic", sans-serif;
 }

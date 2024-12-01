@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
-import { Container } from "../home/Home";
+import { Container } from "pages/home/Home";
 
 import {
   selectSecondMenu,
@@ -11,8 +11,10 @@ import {
   deleteLastMenu,
   deleteAllMenu,
   goToSchedule,
-} from "../home/homeSilce";
+  setProgress,
+} from "pages/home/homeSilce";
 import { v4 } from "uuid";
+import Footer from "pages/footer/Footer";
 
 const AuditoriumHome = () => {
   const dispatch = useDispatch();
@@ -39,7 +41,20 @@ const AuditoriumHome = () => {
     deleteAllMenu: () => {
       dispatch(deleteAllMenu());
     },
+    setProgress: (value) => {
+      dispatch(setProgress({ value }));
+    },
   };
+
+  useEffect(() => {
+    if (store.selectShowArray.length === 1) {
+      store.setProgress(1);
+    } else if (store.selectShowArray.length === 2) {
+      store.setProgress(2);
+    } else if (store.selectShowArray.length === 3) {
+      store.setProgress(3);
+    }
+  }, [store.selectShowArray.length]);
 
   return (
     <Container>
@@ -151,32 +166,7 @@ const AuditoriumHome = () => {
           </BodyItems>
         </SelectBody>
       )}
-
-      <Bottom>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/back.png`}
-            alt={""}
-            onClick={() => {
-              store.deleteLastMenu("selectShowArray");
-              navigate(-1);
-            }}
-          />
-          <img
-            src={`${process.env.PUBLIC_URL}/images/home.png`}
-            alt={""}
-            onClick={() => {
-              store.deleteAllMenu();
-              navigate("/");
-            }}
-          />
-        </div>
-        <div>
-          <img src={`${process.env.PUBLIC_URL}/images/sayAgain.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/dontKnow.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/pancel.png`} alt={""} onClick={() => {}} />
-        </div>
-      </Bottom>
+      <Footer pageNM={"selectShowArray"} />
     </Container>
   );
 };
@@ -185,9 +175,8 @@ export default AuditoriumHome;
 
 export const SelectHeader = styled.div`
   width: 90%;
-  height: 270px;
-  margin: 30px 0;
-
+  height: 240px;
+  /* margin: 30px 0; */
   border-bottom: 5px solid black;
 `;
 
@@ -195,7 +184,7 @@ export const SelectContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 270px;
+  /* height: 270px; */
   gap: 20px;
 
   > img {
@@ -234,7 +223,7 @@ export const SelectContainer = styled.div`
 `;
 export const SelectBody = styled.div`
   width: 90%;
-  min-height: 700px;
+  min-height: 670px;
 
   display: flex;
   justify-content: flex-start;
@@ -290,7 +279,7 @@ export const Bottom = styled.div`
     > img {
       cursor: pointer;
 
-      width: 150px;
+      width: 140px;
       border: 3px solid black;
     }
   }

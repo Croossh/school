@@ -117,7 +117,7 @@ export default Home;
 const Header = styled.h1`
   font-size: 50px;
   font-weight: bold;
-  margin-top: 30px;
+  /* margin-top: 10px; */
 `;
 
 export const Container = styled.div`
@@ -143,7 +143,7 @@ const ItemContainer = styled.div`
 
 const LinkContainer = styled.div`
   width: 80%;
-  height: 200px;
+  height: 210px;
 
   border: 3px solid black;
   border-radius: 10px;

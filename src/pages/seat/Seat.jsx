@@ -11,9 +11,11 @@ import {
   deleteLastMenu,
   deleteAllMenu,
   goToPayments,
+  setProgress,
 } from "../home/homeSilce";
 import { v4 } from "uuid";
 import { Bottom, SelectBody, SelectContainer, SelectHeader } from "../auditorium/AuditoriumHome";
+import Footer from "pages/footer/Footer";
 
 const SeatHome = () => {
   const dispatch = useDispatch();
@@ -40,7 +42,20 @@ const SeatHome = () => {
     deleteAllMenu: () => {
       dispatch(deleteAllMenu());
     },
+    setProgress: (value) => {
+      dispatch(setProgress({ value }));
+    },
   };
+
+  useEffect(() => {
+    if (store.selectSeatArray.length === 1) {
+      store.setProgress(7);
+    } else if (store.selectSeatArray.length === 2) {
+      store.setProgress(8);
+    } else if (store.selectSeatArray.length === 3) {
+      store.setProgress(9);
+    }
+  }, [store.selectSeatArray.length]);
 
   return (
     <Container>
@@ -183,31 +198,7 @@ const SeatHome = () => {
         </SelectBody>
       )}
 
-      <Bottom>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/back.png`}
-            alt={""}
-            onClick={() => {
-              store.deleteLastMenu("selectSeatArray");
-              navigate(-1);
-            }}
-          />
-          <img
-            src={`${process.env.PUBLIC_URL}/images/home.png`}
-            alt={""}
-            onClick={() => {
-              store.deleteAllMenu();
-              navigate("/");
-            }}
-          />
-        </div>
-        <div>
-          <img src={`${process.env.PUBLIC_URL}/images/sayAgain.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/dontKnow.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/pancel.png`} alt={""} onClick={() => {}} />
-        </div>
-      </Bottom>
+      <Footer pageNM={"selectSeatArray"} />
     </Container>
   );
 };

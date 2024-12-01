@@ -5,6 +5,8 @@ const initialState = {
   selectScheduleArray: [],
   selectSeatArray: [],
   selectPaymentsArray: [],
+
+  progress: 0,
 };
 
 const homeSlice = createSlice({
@@ -84,6 +86,12 @@ const homeSlice = createSlice({
         state.selectSeatArray = ["third_0", "2명", "앞쪽"];
       }
     },
+
+    setProgress: (state, action) => {
+      const { value } = action.payload;
+
+      state.progress = value;
+    },
   },
 });
 
@@ -100,6 +108,7 @@ export const {
   goToSeat,
   goToPayments,
   checkArray,
+  setProgress,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

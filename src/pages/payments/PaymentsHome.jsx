@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
-import { Container } from "../home/Home";
+import { Container } from "pages/home/Home";
 
 import {
   selectSecondMenu,
@@ -14,9 +14,11 @@ import {
   deleteAllMenu,
   goToSchedule,
   checkArray,
+  setProgress,
 } from "../home/homeSilce";
 import { v4 } from "uuid";
-import { Bottom, SelectBody, SelectContainer, SelectHeader } from "../auditorium/AuditoriumHome";
+import { Bottom, SelectBody, SelectContainer, SelectHeader } from "pages/auditorium/AuditoriumHome";
+import Footer from "pages/footer/Footer";
 
 const PaymentsHome = () => {
   const dispatch = useDispatch();
@@ -60,12 +62,29 @@ const PaymentsHome = () => {
     checkArray: () => {
       dispatch(checkArray());
     },
+    setProgress: (value) => {
+      dispatch(setProgress({ value }));
+    },
   };
 
   // console.log("selectShowArray", store.selectShowArray);
   // console.log("selectScheduleArray", store.selectScheduleArray);
   // console.log("selectSeatArray", store.selectSeatArray);
   // console.log("selectPaymentsArray", store.selectPaymentsArray);
+
+  useEffect(() => {
+    if (store.selectPaymentsArray.length === 1) {
+      store.setProgress(10);
+    } else if (store.selectPaymentsArray.length === 2) {
+      store.setProgress(11);
+    } else if (store.selectPaymentsArray.length === 3) {
+      store.setProgress(12);
+    } else if (store.selectPaymentsArray.length === 4) {
+      store.setProgress(13);
+    } else if (store.selectPaymentsArray.length === 5) {
+      store.setProgress(14);
+    }
+  }, [store.selectPaymentsArray.length]);
 
   return (
     <Container>
@@ -249,31 +268,7 @@ const PaymentsHome = () => {
         </SelectBody>
       )}
 
-      <Bottom>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/back.png`}
-            alt={""}
-            onClick={() => {
-              store.deleteLastMenu("selectPaymentsArray");
-              navigate(-1);
-            }}
-          />
-          <img
-            src={`${process.env.PUBLIC_URL}/images/home.png`}
-            alt={""}
-            onClick={() => {
-              store.deleteAllMenu();
-              navigate("/");
-            }}
-          />
-        </div>
-        <div>
-          <img src={`${process.env.PUBLIC_URL}/images/sayAgain.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/dontKnow.png`} alt={""} onClick={() => {}} />
-          <img src={`${process.env.PUBLIC_URL}/images/pancel.png`} alt={""} onClick={() => {}} />
-        </div>
-      </Bottom>
+      <Footer pageNM={"selectPaymentsArray"} />
     </Container>
   );
 };
@@ -345,7 +340,7 @@ const ConfrimItem = styled.div`
 
 const SelectBody2 = styled.div`
   width: 90%;
-  min-height: 700px;
+  min-height: 670px;
 
   display: flex;
   justify-content: flex-start;

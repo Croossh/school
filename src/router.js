@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./home/Home";
-import AuditoriumHome from "./auditorium/AuditoriumHome";
-import ScheduleHome from "./schedule/ScheduleHome";
-import SeatHome from "./seat/Seat";
-import PaymentsHome from "./payments/PaymentsHome";
+import Home from "pages/home/Home";
+import AuditoriumHome from "pages/auditorium/AuditoriumHome";
+import ScheduleHome from "pages/schedule/ScheduleHome";
+import SeatHome from "pages/seat/Seat";
+import PaymentsHome from "pages/payments/PaymentsHome";
 
 const Router = () => {
   return (
