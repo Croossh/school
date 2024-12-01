@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectFirstMenu } from "./homeSilce";
+import { selectFirstMenu, setProgress } from "./homeSilce";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,14 @@ const Home = () => {
     selectFirstMenu: (name, type) => {
       dispatch(selectFirstMenu({ name, type }));
     },
+    setProgress: (value) => {
+      dispatch(setProgress({ value }));
+    },
   };
+
+  useEffect(() => {
+    store.setProgress(0);
+  }, []);
 
   return (
     <Container>
