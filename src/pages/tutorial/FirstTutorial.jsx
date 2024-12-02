@@ -11,9 +11,9 @@ const FirstTutorial = ({ onClick }) => {
         <NextButton onClick={onClick}>
           다음으로<div>→</div>
         </NextButton>
-        <Area />
+        <Area1 />
         <Info>
-          <div>화살표의 순서에 맞게 진행됩니다.</div>
+          <div>순서에 맞게 진행됩니다.</div>
           <div>총 14단계로 선택, 날짜, 자리, 결제 순 입니다.</div>
         </Info>
       </TutorialContanier>
@@ -41,7 +41,7 @@ export const TutorialContanier = styled.div`
 
 const NextButton = styled.button`
   position: relative;
-  top: 1170px;
+  top: 912px;
   right: -560px;
 
   width: 400px;
@@ -62,19 +62,21 @@ const NextButton = styled.button`
   gap: 10px;
 `;
 
-const Area = styled.div`
+const Area1 = styled.div`
   position: relative;
   top: 140px;
-  left: 120px;
-  width: 250px;
-  height: 1030px;
+  left: 195px;
 
-  border: 10px solid red;
+  width: 100px;
+  height: 520px;
+  transform: scale(2);
+
+  border: 7px solid red;
 `;
 
 const Info = styled.div`
   position: relative;
-  top: -890px;
+  top: -650px;
   right: -400px;
   width: 540px;
   height: 220px;
