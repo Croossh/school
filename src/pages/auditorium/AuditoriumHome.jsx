@@ -14,7 +14,7 @@ import {
   setProgress,
 } from "pages/home/homeSilce";
 import { v4 } from "uuid";
-import Footer from "pages/footer/Footer";
+import Footer from "pages/bottom/Bottom";
 
 const AuditoriumHome = () => {
   const dispatch = useDispatch();

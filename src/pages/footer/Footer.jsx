@@ -1,140 +1,39 @@
-import { useEffect, useState } from "react";
-import { deleteAllMenu, deleteLastMenu, setProgress } from "pages/home/homeSilce";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Footer = ({ pageNM, backFunc, homeFunc }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [play, setPlay] = useState(false);
-
-  const store = {
-    //callback
-    deleteLastMenu: (type) => {
-      dispatch(deleteLastMenu({ type }));
-    },
-    deleteAllMenu: () => {
-      dispatch(deleteAllMenu());
-    },
-    setProgress: (value) => {
-      dispatch(setProgress({ value }));
-    },
-  };
-
-  const voiceText = ["다시 말해주세요.", "모르겠어요.", "종이와 펜을 주세요."];
-
-  const playVoice = (textNumber) => {
-    const message = new SpeechSynthesisUtterance(); // SpeechSynthesisUtterance 객체 생성
-    message.text = voiceText[textNumber]; // 재생할 텍스트
-    message.lang = "ko-KR"; // 한국어 설정
-    window.speechSynthesis.speak(message); // 음성 출력
-    setPlay(true);
-  };
-
-  useEffect(() => {
-    if (play) {
-      setTimeout(() => {
-        setPlay(false);
-      }, 2000);
-    }
-  }, [play]);
-
+const Footer = () => {
   return (
     <FooterCont>
+      <div>Copyright 2024 박우찬, 박우철. All Rights Reserved.</div>
       <div>
-        <img
-          src={`${process.env.PUBLIC_URL}/images/back.png`}
-          alt={""}
-          onClick={() => {
-            if (typeof backFunc === "function") {
-              backFunc();
-            }
-            store.deleteLastMenu(pageNM);
-            navigate(-1);
-          }}
-        />
-        <img
-          src={`${process.env.PUBLIC_URL}/images/home.png`}
-          alt={""}
-          onClick={() => {
-            if (typeof homeFunc === "function") {
-              homeFunc();
-            }
-            store.deleteAllMenu();
-            store.setProgress(0);
-            navigate("/");
-          }}
-        />
+        본 웹페이지는 한국육영학교의 교육 자료이며, 박우철 선생님의 관리·감독 및 명시적인 승인 하에
+        사용이 허가됩니다.
       </div>
-      <div>
-        <img
-          src={`${process.env.PUBLIC_URL}/images/sayAgain.png`}
-          alt={""}
-          onClick={() => {
-            if (!play) playVoice(0);
-          }}
-        />
-        <img
-          src={`${process.env.PUBLIC_URL}/images/dontKnow.png`}
-          alt={""}
-          onClick={() => {
-            if (!play) playVoice(1);
-          }}
-        />
-        <img
-          src={`${process.env.PUBLIC_URL}/images/pancel.png`}
-          alt={""}
-          onClick={() => {
-            if (!play) playVoice(2);
-          }}
-        />
-      </div>
+      <div>이를 제외한 모든 무단 배포 및 사용을 엄격히 금합니다.</div>
     </FooterCont>
   );
 };
 
 export default Footer;
 
-export const FooterCont = styled.div`
+const FooterCont = styled.div`
+  width: 100%;
+
+  margin-top: 50px;
+  padding-top: 20px;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 10px;
 
-  width: 90%;
-  height: 150px;
+  border-top: 1px solid black;
 
-  margin-top: auto;
-  padding-bottom: 20px;
-
-  > div:first-child {
-    width: 30%;
-    margin-top: auto;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 30px;
-
-    > img {
-      width: 100px;
-      cursor: pointer;
-    }
+  > div {
+    font-size: 15px;
   }
 
-  > div:last-child {
-    width: 60%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: row;
-    gap: 20px;
-
-    > img {
-      cursor: pointer;
-
-      width: 140px;
-      border: 3px solid black;
-    }
+  > div:nth-child(2) {
+    margin-top: 10px;
   }
 `;

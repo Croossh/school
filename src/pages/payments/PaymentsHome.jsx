@@ -18,7 +18,7 @@ import {
 } from "../home/homeSilce";
 import { v4 } from "uuid";
 import { Bottom, SelectBody, SelectContainer, SelectHeader } from "pages/auditorium/AuditoriumHome";
-import Footer from "pages/footer/Footer";
+import Footer from "pages/bottom/Bottom";
 
 const PaymentsHome = () => {
   const dispatch = useDispatch();

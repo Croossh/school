@@ -25,7 +25,7 @@ import {
 } from "./scheduleHomeSlice";
 
 import { v4 } from "uuid";
-import Footer from "pages/footer/Footer";
+import Footer from "pages/bottom/Bottom";
 
 const ScheduleHome = () => {
   const dispatch = useDispatch();
