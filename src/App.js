@@ -42,16 +42,16 @@ function App() {
 
   return (
     <Contanier className="App">
-      {firstState && <FirstTutorial onClick={() => changeTuto("first")} />}
+      {/* {firstState && <FirstTutorial onClick={() => changeTuto("first")} />}
       {secondState && <SecondTutorial onClick={() => changeTuto("second")} />}
       {thirdState && <ThirdTutorial onClick={() => changeTuto("third")} />}
-      {lastState && (
-        <React.Fragment>
-          <Header />
-          <Router />
-          <Footer />
-        </React.Fragment>
-      )}
+      {lastState && ( */}
+      <React.Fragment>
+        <Header />
+        <Router />
+        <Footer />
+      </React.Fragment>
+      {/* )} */}
     </Contanier>
   );
 }
