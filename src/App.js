@@ -34,7 +34,7 @@ function App() {
     // 페이지가 로드된 후 1초 뒤에 차단 해제
     const timer = setTimeout(() => {
       setIsBlocked(false);
-    }, 111);
+    }, 1000);
 
     return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
   }, [next]);
