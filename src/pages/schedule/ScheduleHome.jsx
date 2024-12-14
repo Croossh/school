@@ -176,7 +176,7 @@ const ScheduleHome = () => {
                     store.setSelectTime(temp);
                   }}
                 >
-                  {value}
+                  {`${value}월`}
                 </TimeItems1>
               ))}
             </TimeSelectItem>
@@ -193,7 +193,7 @@ const ScheduleHome = () => {
                     store.setSelectTime(temp);
                   }}
                 >
-                  {value}
+                  {`${value}일`}
                 </TimeItems2>
               ))}
             </TimeSelectItem>
@@ -303,10 +303,13 @@ const ScheduleHome = () => {
         pageNM={"selectScheduleArray"}
         backFunc={() => {
           if (location.pathname === "/schedule/home" && store.selectTime.length === 3) {
+            console.log("???");
             store.initState();
             setConfirm(false);
-            store.deleteLastMenu("selectScheduleArray");
+          } else {
+            navigate(-1);
           }
+          store.deleteLastMenu("selectScheduleArray");
         }}
         homeFunc={() => {
           store.initState();
@@ -444,7 +447,7 @@ const TimeItems1 = styled.div`
   height: 100px;
 
   padding: 20px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
 
   border: 1px solid black;
@@ -461,7 +464,7 @@ const TimeItems2 = styled.div`
   height: 73px;
 
   padding: 10px;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
 
   border: 1px solid black;

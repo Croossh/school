@@ -49,9 +49,10 @@ const Bottom = ({ pageNM, backFunc, homeFunc }) => {
           onClick={() => {
             if (typeof backFunc === "function") {
               backFunc();
+            } else {
+              store.deleteLastMenu(pageNM);
+              navigate(-1);
             }
-            store.deleteLastMenu(pageNM);
-            navigate(-1);
           }}
         />
         <img
