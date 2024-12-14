@@ -80,7 +80,7 @@ const homeSlice = createSlice({
         const day = now.getDate();
         const date = new Date(`${year}-${month}-${day}`);
         const dayOfWeek = daysOfWeek[date.getDay()];
-        state.selectScheduleArray = ["second_0", [month, day, dayOfWeek], "one"];
+        state.selectScheduleArray = ["second_0", [month, day, dayOfWeek], "time1"];
       }
       if (state.selectSeatArray.length < 3) {
         state.selectSeatArray = ["third_0", "2명", "앞쪽"];

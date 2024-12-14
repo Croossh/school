@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
@@ -14,11 +14,13 @@ import {
   setProgress,
 } from "pages/home/homeSilce";
 import { v4 } from "uuid";
-import Footer from "pages/bottom/Bottom";
+import Bottom from "pages/bottom/Bottom";
 
 const AuditoriumHome = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isBlocked, setIsBlocked] = useState(true);
+  const location = useLocation(); // 현재 URL 감지
 
   const store = {
     //state
@@ -47,6 +49,24 @@ const AuditoriumHome = () => {
   };
 
   useEffect(() => {
+    setIsBlocked(true);
+    // 페이지가 로드된 후 1초 뒤에 차단 해제
+    const timer = setTimeout(() => {
+      setIsBlocked(false);
+    }, 111);
+
+    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
+  }, [location.pathname]);
+
+  // 클릭 차단 핸들러
+  const handleClick = (event) => {
+    if (isBlocked) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
+  useEffect(() => {
     if (store.selectShowArray.length === 1) {
       store.setProgress(1);
     } else if (store.selectShowArray.length === 2) {
@@ -57,7 +77,7 @@ const AuditoriumHome = () => {
   }, [store.selectShowArray.length]);
 
   return (
-    <Container>
+    <Container onClick={handleClick} style={{ pointerEvents: isBlocked ? "none" : "auto" }}>
       <SelectHeader>
         <SelectContainer>
           {store.selectShowArray.map((item) => {
@@ -166,7 +186,7 @@ const AuditoriumHome = () => {
           </BodyItems>
         </SelectBody>
       )}
-      <Footer pageNM={"selectShowArray"} />
+      <Bottom pageNM={"selectShowArray"} />
     </Container>
   );
 };
@@ -242,48 +262,48 @@ export const SelectBody = styled.div`
   }
 `;
 
-export const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+// export const Bottom = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
 
-  width: 90%;
-  height: 150px;
+//   width: 90%;
+//   height: 150px;
 
-  margin-top: auto;
-  padding-bottom: 20px;
+//   margin-top: auto;
+//   padding-bottom: 20px;
 
-  > div:first-child {
-    width: 30%;
-    margin-top: auto;
+//   > div:first-child {
+//     width: 30%;
+//     margin-top: auto;
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 30px;
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: center;
+//     gap: 30px;
 
-    > img {
-      width: 100px;
-      cursor: pointer;
-    }
-  }
+//     > img {
+//       width: 100px;
+//       cursor: pointer;
+//     }
+//   }
 
-  > div:last-child {
-    width: 60%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: row;
-    gap: 20px;
+//   > div:last-child {
+//     width: 60%;
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+//     flex-direction: row;
+//     gap: 20px;
 
-    > img {
-      cursor: pointer;
+//     > img {
+//       cursor: pointer;
 
-      width: 140px;
-      border: 3px solid black;
-    }
-  }
-`;
+//       width: 140px;
+//       border: 3px solid black;
+//     }
+//   }
+// `;
 
 const BodyItems = styled.div`
   width: 100%;

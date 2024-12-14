@@ -11,9 +11,10 @@ const initialState = {
       three: "세번째공연",
     },
     schedule: {
-      one: "첫번째시간",
-      two: "두번째시간",
-      three: "세번째시간",
+      time1: "12:00~2:59",
+      time2: "3:00~5:59",
+      time3: "6:00~8:59",
+      time4: "9:00~11:59",
     },
     payments: {
       no: "할인없음",

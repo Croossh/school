@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
@@ -14,12 +14,14 @@ import {
   setProgress,
 } from "../home/homeSilce";
 import { v4 } from "uuid";
-import { Bottom, SelectBody, SelectContainer, SelectHeader } from "../auditorium/AuditoriumHome";
-import Footer from "pages/bottom/Bottom";
+import { SelectBody, SelectContainer, SelectHeader } from "../auditorium/AuditoriumHome";
+import Bottom from "pages/bottom/Bottom";
 
 const SeatHome = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isBlocked, setIsBlocked] = useState(true);
+  const location = useLocation(); // 현재 URL 감지
 
   const store = {
     //state
@@ -48,6 +50,24 @@ const SeatHome = () => {
   };
 
   useEffect(() => {
+    setIsBlocked(true);
+    // 페이지가 로드된 후 1초 뒤에 차단 해제
+    const timer = setTimeout(() => {
+      setIsBlocked(false);
+    }, 111);
+
+    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
+  }, [location.pathname]);
+
+  // 클릭 차단 핸들러
+  const handleClick = (event) => {
+    if (isBlocked) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
+  useEffect(() => {
     if (store.selectSeatArray.length === 1) {
       store.setProgress(7);
     } else if (store.selectSeatArray.length === 2) {
@@ -58,7 +78,7 @@ const SeatHome = () => {
   }, [store.selectSeatArray.length]);
 
   return (
-    <Container>
+    <Container onClick={handleClick} style={{ pointerEvents: isBlocked ? "none" : "auto" }}>
       <SelectHeader>
         <SelectContainer>
           {store.selectSeatArray.map((item) => {
@@ -198,7 +218,7 @@ const SeatHome = () => {
         </SelectBody>
       )}
 
-      <Footer pageNM={"selectSeatArray"} />
+      <Bottom pageNM={"selectSeatArray"} />
     </Container>
   );
 };

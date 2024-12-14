@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
@@ -17,12 +17,14 @@ import {
   setProgress,
 } from "../home/homeSilce";
 import { v4 } from "uuid";
-import { Bottom, SelectBody, SelectContainer, SelectHeader } from "pages/auditorium/AuditoriumHome";
-import Footer from "pages/bottom/Bottom";
+import { SelectBody, SelectContainer, SelectHeader } from "pages/auditorium/AuditoriumHome";
+import Bottom from "pages/bottom/Bottom";
 
 const PaymentsHome = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isBlocked, setIsBlocked] = useState(true);
+  const location = useLocation(); // 현재 URL 감지
 
   const store = {
     //state
@@ -73,6 +75,24 @@ const PaymentsHome = () => {
   // console.log("selectPaymentsArray", store.selectPaymentsArray);
 
   useEffect(() => {
+    setIsBlocked(true);
+    // 페이지가 로드된 후 1초 뒤에 차단 해제
+    const timer = setTimeout(() => {
+      setIsBlocked(false);
+    }, 111);
+
+    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
+  }, [location.pathname]);
+
+  // 클릭 차단 핸들러
+  const handleClick = (event) => {
+    if (isBlocked) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
+  useEffect(() => {
     if (store.selectPaymentsArray.length === 1) {
       store.setProgress(10);
     } else if (store.selectPaymentsArray.length === 2) {
@@ -86,8 +106,10 @@ const PaymentsHome = () => {
     }
   }, [store.selectPaymentsArray.length]);
 
+  console.log(store.papago);
+  console.log(store.selectScheduleArray);
   return (
-    <Container>
+    <Container onClick={handleClick} style={{ pointerEvents: isBlocked ? "none" : "auto" }}>
       <SelectHeader>
         <SelectContainer>
           {store.selectPaymentsArray.map((item, idx) => {
@@ -268,7 +290,7 @@ const PaymentsHome = () => {
         </SelectBody>
       )}
 
-      <Footer pageNM={"selectPaymentsArray"} />
+      <Bottom pageNM={"selectPaymentsArray"} />
     </Container>
   );
 };

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import { Container } from "pages/home/Home";
-import { Bottom, SelectBody, SelectContainer, SelectHeader } from "pages/auditorium/AuditoriumHome";
+import { SelectBody, SelectContainer, SelectHeader } from "pages/auditorium/AuditoriumHome";
 
 import {
   selectSecondMenu,
@@ -25,13 +25,14 @@ import {
 } from "./scheduleHomeSlice";
 
 import { v4 } from "uuid";
-import Footer from "pages/bottom/Bottom";
+import Bottom from "pages/bottom/Bottom";
 
 const ScheduleHome = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const [confirm, setConfirm] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(true);
 
   const store = {
     //state
@@ -84,11 +85,22 @@ const ScheduleHome = () => {
   };
 
   useEffect(() => {
-    return () => {
-      store.initState();
-      setConfirm(false);
-    };
-  }, []);
+    setIsBlocked(true);
+    // 페이지가 로드된 후 1초 뒤에 차단 해제
+    const timer = setTimeout(() => {
+      setIsBlocked(false);
+    }, 111);
+
+    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
+  }, [location.pathname, store.selectTime.length]);
+
+  // 클릭 차단 핸들러
+  const handleClick = (event) => {
+    if (isBlocked) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
 
   useEffect(() => {
     if (location.pathname === "/schedule/home") {
@@ -125,8 +137,10 @@ const ScheduleHome = () => {
     }
   }, [store.selectScheduleArray.length]);
 
+  console.log(store.selectTime);
+
   return (
-    <Container>
+    <Container onClick={handleClick} style={{ pointerEvents: isBlocked ? "none" : "auto" }}>
       <SelectHeader>
         <SelectContainer>
           {store.selectScheduleArray.map((item) => {
@@ -237,8 +251,8 @@ const ScheduleHome = () => {
           <h1>공연시간 알려줄 수 있나요?</h1>
           <BodyItems>
             <img
-              src={`${process.env.PUBLIC_URL}/images/one.jpg`}
-              name={"one"}
+              src={`${process.env.PUBLIC_URL}/images/time1.jpg`}
+              name={"time1"}
               alt={""}
               onClick={(e) => {
                 store.selectThirdMenu(e, "selectScheduleArray");
@@ -246,8 +260,8 @@ const ScheduleHome = () => {
               }}
             />
             <img
-              src={`${process.env.PUBLIC_URL}/images/two.jpg`}
-              name={"two"}
+              src={`${process.env.PUBLIC_URL}/images/time2.jpg`}
+              name={"time2"}
               alt={""}
               onClick={(e) => {
                 store.selectThirdMenu(e, "selectScheduleArray");
@@ -255,12 +269,21 @@ const ScheduleHome = () => {
               }}
             />
             <img
-              src={`${process.env.PUBLIC_URL}/images/three.jpg`}
-              name={"three"}
+              src={`${process.env.PUBLIC_URL}/images/time3.jpg`}
+              name={"time3"}
               alt={""}
               onClick={(e) => {
                 store.selectThirdMenu(e, "selectScheduleArray");
                 navigate("1/3");
+              }}
+            />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/time4.jpg`}
+              name={"time4"}
+              alt={""}
+              onClick={(e) => {
+                store.selectThirdMenu(e, "selectScheduleArray");
+                navigate("1/1");
               }}
             />
           </BodyItems>
@@ -299,17 +322,20 @@ const ScheduleHome = () => {
         </SelectBody>
       )}
 
-      <Footer
+      <Bottom
         pageNM={"selectScheduleArray"}
         backFunc={() => {
           if (location.pathname === "/schedule/home" && store.selectTime.length === 3) {
-            console.log("???");
+            store.initState();
+            setConfirm(false);
+            store.deleteLastMenu("selectScheduleArray");
+          } else if (location.pathname === "/schedule/home" && store.selectTime.length === 1) {
             store.initState();
             setConfirm(false);
           } else {
             navigate(-1);
+            store.deleteLastMenu("selectScheduleArray");
           }
-          store.deleteLastMenu("selectScheduleArray");
         }}
         homeFunc={() => {
           store.initState();

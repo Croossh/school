@@ -13,13 +13,39 @@ import ThirdTutorial from "pages/tutorial/ThirdTutorial";
 function App() {
   const navigate = useNavigate();
   const [next, setNext] = useState(0);
+  const [isBlocked, setIsBlocked] = useState(true);
 
   const store = {
     //state
     selectShowArray: useSelector((state) => state["homeReducer"].selectShowArray),
   };
 
-  const tutoArray = ["rule", "progress1", "progress2", "teacher_detail", "studant_detail", "start"];
+  const tutoArray = [
+    "rule_1",
+    "progress1_1",
+    "progress2_1",
+    "teacher_detail_1",
+    "studant_detail_1",
+    "start_1",
+  ];
+
+  useEffect(() => {
+    if (!isBlocked) setIsBlocked(true);
+    // 페이지가 로드된 후 1초 뒤에 차단 해제
+    const timer = setTimeout(() => {
+      setIsBlocked(false);
+    }, 111);
+
+    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
+  }, [next]);
+
+  // 클릭 차단 핸들러
+  const handleClick = (event) => {
+    if (isBlocked) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
 
   useEffect(() => {
     if (!store.selectShowArray.length > 0) {
@@ -27,10 +53,12 @@ function App() {
     }
   }, []);
 
-  console.log(next, tutoArray[next]);
-
   return (
-    <Contanier className="App">
+    <Contanier
+      className="App"
+      onClick={handleClick}
+      style={{ pointerEvents: isBlocked ? "none" : "auto" }}
+    >
       <React.Fragment>
         {next < 6 && (
           <React.Fragment>
@@ -45,13 +73,14 @@ function App() {
           <React.Fragment>
             <Header />
             <Router />
-            <Footer />
+            <div style={{ height: "50px" }}></div>
           </React.Fragment>
         )}
       </React.Fragment>
     </Contanier>
   );
 }
+// <Footer />;
 
 export default App;
 
@@ -65,26 +94,31 @@ const Contanier = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  user-select: none;
 `;
 
 const Tutorial = styled.div`
   width: 1000px;
-  /* height: 1500px; */
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  > img {
+    width: 1000px;
+  }
 `;
 
 const NextButton1 = styled.button`
   position: absolute;
   z-index: 99999;
 
-  margin-left: 600px;
-  margin-top: 690px;
+  margin-left: 650px;
+  margin-top: 1070px;
 
-  width: 200px;
-  height: 80px;
+  width: 300px;
+  height: 130px;
 
   cursor: pointer;
 
@@ -92,7 +126,7 @@ const NextButton1 = styled.button`
   border: 1px solid #5a72db;
   background-color: #5a72db;
   color: white;
-  font-size: 30px;
+  font-size: 45px;
   box-shadow: 5px 5px 5px gray;
 
   display: flex;
@@ -105,11 +139,11 @@ const NextButton2 = styled.button`
   position: absolute;
   z-index: 99999;
 
-  margin-left: 400px;
-  /* /  margin-top: 690px; */
+  margin-left: 360px;
+  margin-top: 50px;
 
-  width: 200px;
-  height: 80px;
+  width: 300px;
+  height: 130px;
 
   cursor: pointer;
 
@@ -117,7 +151,7 @@ const NextButton2 = styled.button`
   border: 1px solid #5a72db;
   background-color: #5a72db;
   color: white;
-  font-size: 30px;
+  font-size: 45px;
   box-shadow: 5px 5px 5px gray;
 
   display: flex;
