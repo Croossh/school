@@ -89,7 +89,7 @@ const ScheduleHome = () => {
     // 페이지가 로드된 후 1초 뒤에 차단 해제
     const timer = setTimeout(() => {
       setIsBlocked(false);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
   }, [location.pathname, store.selectTime.length]);
@@ -248,7 +248,7 @@ const ScheduleHome = () => {
 
       {store.selectScheduleArray.length === 2 && confirm && (
         <SelectBody>
-          <h1>공연시간 알려줄 수 있나요?</h1>
+          <h1>공연시간을 알려줄 수 있나요?</h1>
           <BodyItems>
             <img
               src={`${process.env.PUBLIC_URL}/images/time1.jpg`}
