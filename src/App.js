@@ -73,14 +73,14 @@ function App() {
           <React.Fragment>
             <Header />
             <Router />
-            <div style={{ height: "50px" }}></div>
+            <Footer />
           </React.Fragment>
         )}
       </React.Fragment>
     </Contanier>
   );
 }
-// <Footer />;
+// ;
 
 export default App;
 

@@ -83,7 +83,12 @@ const SeatHome = () => {
         <SelectContainer>
           {store.selectSeatArray.map((item) => {
             if (item.includes("쪽")) {
-              return <div key={v4()}>{item}</div>;
+              return (
+                <SeatInfo key={v4()}>
+                  <div>좌석 위치</div>
+                  <div>{item}</div>
+                </SeatInfo>
+              );
             } else if (item.includes("명")) {
               return (
                 <div key={v4()}>
@@ -224,6 +229,12 @@ const SeatHome = () => {
 };
 
 export default SeatHome;
+
+const SeatInfo = styled.div`
+  > div:first-child {
+    /* font-size: 30px; */
+  }
+`;
 
 const BodyItems = styled.div`
   width: 100%;

@@ -227,7 +227,7 @@ const PaymentsHome = () => {
                 if (idx === 0) return "";
                 if (idx === 1)
                   return <div key={v4()}>{`${item[0]}월 ${item[1]}일(${item[2]})`}</div>;
-                return <div key={v4()}>{store.papago.schedule[item]}</div>;
+                return <div key={v4()}>{`(${store.papago.schedule[item]})`}</div>;
               })}
             </div>
             <div>
